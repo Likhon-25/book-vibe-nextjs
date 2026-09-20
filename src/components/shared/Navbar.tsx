@@ -6,17 +6,38 @@ import Link from "next/link";
 const link = (
   <>
     <li>
-      <Link href={"/"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
+      <Link
+        href={"/"}
+        className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]"
+      >
         Home
       </Link>
     </li>
 
-    <li><Link href={"/books"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
-       Books
-      </Link> </li>
-    <li><Link href={"/listed-books"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
-      Listed Books
-      </Link> </li>
+    <li>
+      <Link
+        href={"/books"}
+        className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]"
+      >
+        Books
+      </Link>{" "}
+    </li>
+    <li>
+      <Link
+        href={"/listed-books"}
+        className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]"
+      >
+        Listed Books
+      </Link>{" "}
+    </li>
+    <li>
+      <Link
+        href={"/read-books"}
+        className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]"
+      >
+        Read Books
+      </Link>{" "}
+    </li>
   </>
 );
 const Navbar = () => {
@@ -61,16 +82,14 @@ const Navbar = () => {
               </div>
 
               <span className="font-serif font-bold text-[#131313]">
-                Daisy UI
+                Book Vibe
               </span>
             </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal gap-2 px-1">
-              {link}
-            </ul>
+            <ul className="menu menu-horizontal gap-2 px-1">{link}</ul>
           </div>
 
           {/* Buttons */}
