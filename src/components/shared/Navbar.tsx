@@ -11,11 +11,12 @@ const link = (
       </Link>
     </li>
 
-    <li>
-      <Link href={"/books"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
+    <li><Link href={"/books"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
        Books
-      </Link>
-    </li>
+      </Link> </li>
+    <li><Link href={"/listed-books"} className=" font-medium text-gray-600 hover:bg-[#23BE0A]/10 hover:text-[#23BE0A]">
+      Listed Books
+      </Link> </li>
   </>
 );
 const Navbar = () => {

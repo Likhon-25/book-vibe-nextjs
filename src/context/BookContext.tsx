@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { createContext } from "vm";
+"use client";
 
-const BookContext = createContext({});
+import React, { createContext, useState } from "react";
+
+export const BookContext = createContext({});
 
 const BookProvider = ({ children }) => {
   const [readBooks, setReadBooks] = useState([]);
@@ -14,7 +15,9 @@ const BookProvider = ({ children }) => {
     setWishlist,
   };
 
-  return <BookContext.Provider value={shareData}>{ children }</BookContext.Provider>;
+  return (
+    <BookContext.Provider value={shareData}>{children}</BookContext.Provider>
+  );
 };
 
 export default BookProvider;
