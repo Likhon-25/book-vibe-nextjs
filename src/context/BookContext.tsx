@@ -1,10 +1,10 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 
 export const BookContext = createContext({});
 
-const BookProvider = ({ children }) => {
+const BookProvider = ({ children } : {children : ReactNode}) => {
   const [readBooks, setReadBooks] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
