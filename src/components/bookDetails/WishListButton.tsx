@@ -10,6 +10,11 @@ const WishListButton = ({ book }: { book: IBook }) => {
   const handleWishlistBook = () => {
     console.log("Wishlist button triger", book);
 
+    if (wishlist.some((wishlistBook) => wishlistBook.bookId === book.bookId)) {
+      toast.info(`"${book.bookName}" is already in your wishlist`);
+      return;
+    }
+
     setWishlist([...wishlist, book]);
     toast.success(`you have read "${book.bookName}"`);
   };

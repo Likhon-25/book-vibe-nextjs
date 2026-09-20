@@ -1,6 +1,8 @@
 "use client";
 
-import React from "react";
+import { BookContext } from "@/context/BookContext";
+import { IBook } from "@/types/books.type";
+import React, { useContext } from "react";
 import {
   BarChart,
   Bar,
@@ -9,9 +11,7 @@ import {
   CartesianGrid,
   LabelList,
   Tooltip,
-  LabelProps,
   BarShapeProps,
-  Label,
 } from "recharts";
 
 const colors = [
@@ -49,60 +49,20 @@ const TriangleBar = (props: BarShapeProps) => {
   );
 };
 
-const CustomColorLabel = (props: LabelProps) => {
-  const fill = colors[(props.index ?? 0) % colors.length];
-  return <Label {...props} fill={fill} />;
-};
-
 const ReadBooks = () => {
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+  const { readBooks } = useContext(BookContext);
+  const data = readBooks.map((book: IBook, index: number) => {
+    return {
+      name: book.bookName,
+      totalPages: book.totalPages,
+      pv: index + 1,
+      amt: index + 1,
+    };
+  });
 
   return (
     <div className="container mx-auto my-5">
-      <BarChart
+     {readBooks.length > 0 ?  <BarChart
         style={{
           width: "100%",
           maxWidth: "700px",
@@ -122,11 +82,11 @@ const ReadBooks = () => {
         <Tooltip cursor={{ fillOpacity: 0.5 }} />
         <XAxis dataKey="name" />
         <YAxis width="auto" />
-        <Bar dataKey="uv" shape={TriangleBar} activeBar>
-          <LabelList content={CustomColorLabel} position="top" />
+        <Bar dataKey="totalPages" shape={TriangleBar} activeBar>
+          <LabelList dataKey="totalPages" position="top" />
         </Bar>
         {/* <RechartsDevtools /> */}
-      </BarChart>
+      </BarChart> : <p className="font-bold text-4xl text-center">No read books to display</p> }
     </div>
   );
 };

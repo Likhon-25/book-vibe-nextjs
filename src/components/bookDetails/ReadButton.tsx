@@ -4,15 +4,19 @@ import { IBook } from "@/types/books.type";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 
-const ReadButton = ({ book } : {book : IBook}) => {
-
-    const {readBooks, setReadBooks} = useContext(BookContext)
+const ReadButton = ({ book }: { book: IBook }) => {
+  const { readBooks, setReadBooks } = useContext(BookContext);
 
   const handleReadBook = () => {
-    console.log('Read Book button triger' , book);
+    console.log("Read Book button triger", book);
 
-    setReadBooks([...readBooks, book])
-    toast.success(`you have readlist "${book.bookName}"`)
+    if (readBooks.some((readBook) => readBook.bookId === book.bookId)) {
+      toast.info(`"${book.bookName}" is already in your read list`);
+      return;
+    }
+
+    setReadBooks([...readBooks, book]);
+    toast.success(`you have readlist "${book.bookName}"`);
   };
 
   return (

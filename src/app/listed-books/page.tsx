@@ -1,6 +1,5 @@
 "use client";
 import { BookContext } from "@/context/BookContext";
-import BookCard from "@/components/shared/BookCard";
 import ListedBooksCard from "@/components/shared/ListedBooksCard";
 import React, { useContext } from "react";
 
