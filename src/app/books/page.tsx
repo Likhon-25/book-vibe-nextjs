@@ -3,9 +3,20 @@ import { IBook } from "@/types/books.type";
 import BookCard from "@/components/shared/BookCard";
 
 const getBooks = async () => {
-  const res = await fetch("http://localhost:3000/booksData.json");
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`,
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch books: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching books data:", error);
+    return [];
+  }
 };
 
 const Books = async () => {
@@ -16,11 +27,11 @@ const Books = async () => {
       {/* Section Heading */}
       <div className="mb-10 text-center">
         <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#23BE0A]">
-           Our Collection
+          Our Collection
         </p>
 
         <h2 className="font-serif text-4xl font-bold text-[#131313] md:text-5xl">
-        Explore  All Books
+          Explore All Books
         </h2>
 
         <p className="mx-auto mt-3 max-w-2xl text-gray-500">

@@ -11,9 +11,20 @@ interface IBookDetailsPageProps {
 }
 
 const getBooks = async () => {
-  const res = await fetch("http://localhost:3000/booksData.json");
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`,
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch books: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching books data:", error);
+    return [];
+  }
 };
 
 const BookDetilsPage = async ({ params }: IBookDetailsPageProps) => {
@@ -61,10 +72,7 @@ const BookDetilsPage = async ({ params }: IBookDetailsPageProps) => {
 
           {/* Author */}
           <p className="mt-3 text-base text-gray-600">
-            By :{" "}
-            <span className="font-medium text-[#222]">
-              {book.author}
-            </span>
+            By : <span className="font-medium text-[#222]">{book.author}</span>
           </p>
 
           {/* Divider */}
@@ -72,9 +80,7 @@ const BookDetilsPage = async ({ params }: IBookDetailsPageProps) => {
 
           {/* Category */}
           <div className="border-b border-gray-200 pb-4">
-            <p className="text-sm text-gray-700">
-              {book.category}
-            </p>
+            <p className="text-sm text-gray-700">{book.category}</p>
           </div>
 
           {/* Review */}
@@ -88,9 +94,7 @@ const BookDetilsPage = async ({ params }: IBookDetailsPageProps) => {
           {/* Tags */}
           <div className="border-b border-gray-200 py-5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="mr-2 text-sm font-bold text-[#222]">
-                Tag
-              </span>
+              <span className="mr-2 text-sm font-bold text-[#222]">Tag</span>
 
               {book.tags.map((tag) => (
                 <span
@@ -106,33 +110,23 @@ const BookDetilsPage = async ({ params }: IBookDetailsPageProps) => {
           {/* Book Information */}
           <div className="border-b border-gray-200 py-5">
             <div className="grid grid-cols-[140px_1fr] gap-y-3 text-sm">
-              <span className="text-gray-500">
-                Number of Pages:
-              </span>
+              <span className="text-gray-500">Number of Pages:</span>
               <span className="font-semibold text-[#222]">
                 {book.totalPages}
               </span>
 
-              <span className="text-gray-500">
-                Publisher:
-              </span>
+              <span className="text-gray-500">Publisher:</span>
               <span className="font-semibold text-[#222]">
                 {book.publisher}
               </span>
 
-              <span className="text-gray-500">
-                Year of Publishing:
-              </span>
+              <span className="text-gray-500">Year of Publishing:</span>
               <span className="font-semibold text-[#222]">
                 {book.yearOfPublishing}
               </span>
 
-              <span className="text-gray-500">
-                Rating:
-              </span>
-              <span className="font-semibold text-[#222]">
-                {book.rating}
-              </span>
+              <span className="text-gray-500">Rating:</span>
+              <span className="font-semibold text-[#222]">{book.rating}</span>
             </div>
           </div>
 
